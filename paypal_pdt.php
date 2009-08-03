@@ -1,9 +1,11 @@
 <?php
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Paypal Payment Data Transfer (PDT) class for PHP
+ * Paypal Payment Data Transfer (PDT) class for PHP 5
  *
  * A simple class encapsulating Paypal's PDT logic.
+ *
+ * Based on Paypal's DevCentral code example, but made pretty.
  * 
  * Paypal API Documentation:
  * https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=developer/howto_html_paymentdatatransfer
@@ -15,13 +17,32 @@
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
+ * Requirements:
+ *
+ *   PHP >= 5.1 with sockets support enabled
+ *
  * Basic usage:
  *
  *   $pdt = new PaypalPaymentDataTransfer($_GET['tx'], $auth_token);
  *   
  *   if ($pdt->success) {
+ *		// Output all raw data:
  *		var_dump($pdt->data);
+ *
+ *      // Output just one property:
+ *      echo $pdt->mc_gross;
  *   }
+ *
+ * Options:
+ *
+ *   Pass options as an associative array in the third parameter of the
+ *   class constructor.
+ *
+ *   - use_sandbox     Use Paypal's sandbox server instead of production
+ *	                   Default: false
+ *
+ *   - use_ssl         Use HTTPS
+ *                     Default: false
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
